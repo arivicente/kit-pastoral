@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "nome_retiro": "Retiro de 1 Dia: 'Desperta, Tu Que Dormes!'",
+    "publico_alvo": "Jovens de 14 a 25 anos (iniciantes e veteranos)",
+    "tema_central": "Efésios 5:14 - 'Desperta, ó tu que dormes, levanta-te dentre os mortos e Cristo te iluminará.'",
+    "cronograma_completo": [
+      {
+        "horario": "08:00 - 08:45",
+        "atividade": "Acolhida, Credenciamento e Café da Manhã Fraterno",
+        "detalhes": "Música animada, entrega de crachás personalizados e café da manhã farto para quebrar a timidez inicial."
+      },
+      {
+        "horario": "08:45 - 09:30",
+        "atividade": "Animação e Quebra-Gelo Geral",
+        "detalhes": "Dinâmicas de integração no pátio para soltar o corpo e fazer todo mundo rir junto."
+      },
+      {
+        "horario": "09:30 - 10:45",
+        "atividade": "Pregação 1: 'O Sono da Alma - O que tem anestesiado o seu coração?'",
+        "detalhes": "Abordagem sobre o cansaço do mundo, vícios, redes sociais e a sensação de vazio interior."
+      },
+      {
+        "horario": "10:45 - 11:30",
+        "atividade": "Deserto Pessoal (Momento a Sós com Deus)",
+        "detalhes": "Cada jovem recebe uma folha pautada e um versículo para ficar 45 minutos em silêncio individual."
+      },
+      {
+        "horario": "11:30 - 12:30",
+        "atividade": "Partilha em Pequenos Grupos (Células)",
+        "detalhes": "Grupos de 5 a 6 pessoas guiados por um animador para partilhar as impressões do deserto."
+      },
+      {
+        "horario": "12:30 - 14:00",
+        "atividade": "Almoço Comunitário e Momento Livre",
+        "detalhes": "Música ambiente, jogos de tabuleiro, esportes e tempo de convivência leve."
+      },
+      {
+        "horario": "14:00 - 15:30",
+        "atividade": "Gincana dos Dons & Espírito de Equipe",
+        "detalhes": "Provas lúdicas de cooperação que exigem que todos os integrantes participem."
+      },
+      {
+        "horario": "15:30 - 17:00",
+        "atividade": "Pregação 2 & Adoração ao Santíssimo / Momento Forte de Oração",
+        "detalhes": "Ambiente à meia-luz, velas no chão, música devocional profunda e oração por cura interior e perdão."
+      },
+      {
+        "horario": "17:00 - 18:00",
+        "atividade": "Santa Missa ou Culto de Encerramento & Envio Missionário",
+        "detalhes": "Ato de compromisso com a comunidade e entrega do cartão-aliança."
+      }
+    ],
+    "checklists_necessarios": {
+      "equipe_de_apoio": ["Coordenador Geral", "Equipe de Cozinha", "Ministério de Música", "Equipe de Intercessão", "Monitores de Grupos"],
+      "materiais_liturgicos": ["Velas", "Hóstias/Pão", "Vinho", "Crucifixo", "Tecidos para altar (cores litúrgicas)", "Luz ambiente"],
+      "secretaria": ["Fichas de inscrição com contato de emergência e alergias", "Crachás", "Canetas", "Apostila do Retirante"]
+    }
+  },
+  {
+    "id": 2,
+    "nome_retiro": "Retiro de Fim de Semana: 'Metanoia - A Grande Virada'",
+    "publico_alvo": "Jovens e Líderes Juvenis",
+    "tema_central": "Lucas 15:20 - 'Levantou-se, pois, e foi para seu pai. E, quando ainda estava longe, viu-o seu pai, e se moveu de íntima compaixão e, correndo, lançou-se-lhe ao pescoço e o beijou.'",
+    "estrutura_dos_dias": {
+      "sexta_noite": "Chegada, jantar leve, introdução do tema 'Onde estou pisando?' e recolhimento silencioso para o descanso.",
+      "sabado": "Dia da Reconciliação: Manhã com pregações de resgate de identidade e amor do Pai. Tarde com dinâmicas de perdão e cartas dos pais. Noite de Adoração profunda e Vigília da Luz.",
+      "domingo": "Dia da Vitória e do Envio: Pregação sobre ser 'Sal e Luz no mundo real', almoço festivo com as famílias e celebração de envio."
+    }
+  }
+]

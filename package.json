@@ -4,15 +4,18 @@
   "description": "Kit Pastoral para Jovens Católicos e Líderes de Encontros",
   "type": "module",
   "scripts": {
-    "dev": "wrangler pages dev public",
-    "deploy": "wrangler pages deploy public --project-name kit-pastoral",
-    "spy": "node scripts/spy_ads.js"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "spy": "node scripts/spy_ads.js",
+    "pdf": "node scripts/generate_pdf.js",
+    "summary": "node scripts/summary.js"
   },
   "dependencies": {
     "apify-client": "^2.11.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "puppeteer": "^24.3.0"
   },
   "devDependencies": {
-    "wrangler": "^4.88.0"
+    "wrangler": "^4.158.0"
   }
 }

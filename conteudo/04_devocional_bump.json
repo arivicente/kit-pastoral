@@ -1,0 +1,37 @@
+{
+  "produto": "Devocional Guiado de 30 Dias para Jovens",
+  "formato": "Apostila A4 em PDF com páginas de reflexão e checklist diário",
+  "introducao": "Criado para ajudar os jovens a romperem com a preguiça espiritual e construírem uma rotina inabalável de 15 minutos com a Palavra de Deus.",
+  "metodo_dos_4_passos": {
+    "1_ler": "Leitura atenta do versículo do dia.",
+    "2_meditar": "O que Deus está me dizendo através deste texto hoje?",
+    "3_orar": "Transformar a meditação em um diálogo sincero com Deus.",
+    "4_agir": "Uma atitude prática para colocar em prática antes de ir dormir."
+  },
+  "amostra_primeira_semana": [
+    {
+      "dia": 1,
+      "titulo": "Quem Deus Diz Que Você É?",
+      "passagem": "1 João 3:1 - 'Vede que grande amor nos tem concedido o Pai, a ponto de sermos chamados filhos de Deus; e, de fato, somos.'",
+      "reflexao": "O mundo tenta te rotular pelas suas notas, pelo seu corpo ou pelos seus erros do passado. Mas antes de qualquer opinião humana, você é filho amado do Criador.",
+      "oracao": "Senhor, ajuda-me a desarmar todas as vozes mentirosas que tentam definir meu valor. Hoje descanso na certeza de ser Teu filho.",
+      "atitude_pratica": "Escreva 'Sou filho amado de Deus' em um post-it e cole no espelho do seu quarto."
+    },
+    {
+      "dia": 2,
+      "titulo": "Entregando as Preocupações",
+      "passagem": "1 Pedro 5:7 - 'Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.'",
+      "reflexao": "Você não foi feito para carregar o peso do mundo nas costas. Quando a preocupação aperta, lance aos pés de Cristo.",
+      "oracao": "Pai celestial, hoje eu Te entrego os pensamentos que me tiram a paz. Confio que o Teu cuidado é maior que meus problemas.",
+      "atitude_pratica": "Faça uma lista de 3 coisas que estão te preocupando e rasgue o papel como sinal de entrega a Deus."
+    },
+    {
+      "dia": 3,
+      "titulo": "Lâmpada para os Meus Pés",
+      "passagem": "Salmo 119:105 - 'Lâmpada para os meus pés é a tua palavra e luz, para o meu caminho.'",
+      "reflexao": "A lâmpada não ilumina toda a estrada de 10 km à frente, ela ilumina apenas o próximo passo. Confie no passo de hoje.",
+      "oracao": "Espírito Santo, dá-me clareza para a decisão que preciso tomar hoje. Ilumina os meus passos.",
+      "atitude_pratica": "Sublinhe um versículo na sua Bíblia física e compartilhe com um amigo que precisa de ânimo."
+    }
+  ]
+}
