@@ -57,16 +57,27 @@ async function runAdEspionage() {
     for (const ad of items) {
       const dataInicioRaw = ad.startDate || ad.start_date || ad.ad_delivery_start_time;
       let diasAtivo = 0;
+      let dataInicioFormatada = 'Não informada';
       if (dataInicioRaw) {
-        const dataInicio = new Date(dataInicioRaw);
-        diasAtivo = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
+        let ts = Number(dataInicioRaw);
+        if (!isNaN(ts)) {
+          // Converte segundos para milissegundos se for Unix timestamp padrão
+          if (ts < 1e11) ts = ts * 1000;
+          const dataInicio = new Date(ts);
+          diasAtivo = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
+          dataInicioFormatada = dataInicio.toISOString().split('T')[0];
+        } else {
+          const dataInicio = new Date(dataInicioRaw);
+          diasAtivo = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
+          dataInicioFormatada = dataInicio.toISOString().split('T')[0];
+        }
       }
 
       minerados.push({
         pageName: ad.pageName || ad.page_name || 'Anunciante Sem Nome',
         pageId: ad.pageId || ad.page_id || '',
         diasAtivo: diasAtivo,
-        dataInicio: dataInicioRaw || 'Não informada',
+        dataInicio: dataInicioFormatada,
         adText: ad.adCreativeBody || ad.ad_creative_body || ad.snapshot?.body?.text || '',
         linkUrl: ad.linkUrl || ad.link_url || ad.snapshot?.link_url || '',
         mediaType: ad.mediaType || ad.media_type || 'IMAGE',
