@@ -1,0 +1,18 @@
+{
+  "name": "kit-pastoral",
+  "version": "1.0.0",
+  "description": "Kit Pastoral para Jovens Católicos e Líderes de Encontros",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public --project-name kit-pastoral",
+    "spy": "node scripts/spy_ads.js"
+  },
+  "dependencies": {
+    "apify-client": "^2.11.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "wrangler": "^4.88.0"
+  }
+}
