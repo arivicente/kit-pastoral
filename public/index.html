@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Kit Pastoral para Jovens | Mais de 300 Recursos Prontos em PDF</title>
   <meta name="description" content="Prepare encontros, retiros e dinâmicas inesquecíveis em menos de 15 minutos. Mais de 300 recursos em PDF prontos para imprimir e usar.">
   
@@ -12,7 +12,7 @@
   <!-- Google Fonts & Tailwind CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -48,41 +48,72 @@
     .shadow-pop {
       box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.25);
     }
+    .pulse-btn {
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .order-bump-card {
+      transition: all 0.2s ease-in-out;
+    }
+    .order-bump-card.checked {
+      background-color: #FEF3C7;
+      border-color: #D97706;
+      box-shadow: 0 4px 12px -2px rgba(217, 119, 6, 0.2);
+    }
+    /* Previne zoom forçado no iOS ao focar inputs */
+    input[type="text"], input[type="email"], input[type="tel"] {
+      font-size: 16px !important;
+    }
   </style>
 </head>
-<body class="bg-paper text-brandStone font-sans antialiased selection:bg-amber-200 selection:text-amber-900">
+<body class="bg-paper text-brandStone font-sans antialiased selection:bg-amber-200 selection:text-amber-900 pt-9 sm:pt-10">
 
-  <!-- BARRA DE URGÊNCIA SUPERIOR -->
-  <aside aria-label="Alerta de oferta" class="bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-amber-50 text-xs sm:text-sm py-2.5 px-4 text-center font-medium shadow-sm">
-    <div class="max-w-5xl mx-auto flex items-center justify-center gap-2">
-      <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-      <span><strong>Oferta Especial para Líderes & Animadores:</strong> Acesso Vitalício + Atualizações com 62% de desconto liberado hoje.</span>
+  <!-- CRONÔMETRO FIXADO NO TOPO (STICKY / TRANSLÚCIDO COM BLUR) -->
+  <aside aria-label="Alerta de oferta" class="fixed top-0 left-0 right-0 z-50 h-9 sm:h-10 bg-stone-950/85 backdrop-blur-md border-b border-amber-500/30 text-stone-200 text-xs py-1.5 px-3 shadow-md flex items-center">
+    <div class="max-w-5xl mx-auto w-full flex items-center justify-between sm:justify-center gap-2 sm:gap-4">
+      <div class="flex items-center gap-2 truncate">
+        <span class="relative flex h-2 w-2 flex-shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        <span class="font-medium text-[11px] sm:text-xs tracking-tight truncate">
+          <strong class="text-white">Condição Especial:</strong> 62% OFF reservado por:
+        </span>
+      </div>
+      <div class="flex items-center gap-1.5 flex-shrink-0">
+        <span id="countdown" class="bg-amber-950/90 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded font-mono font-extrabold text-[11px] sm:text-xs tracking-widest shadow-inner">14:59</span>
+      </div>
     </div>
   </aside>
 
-  <!-- BANNER TOPO FULL-WIDTH RESPONSIVO (NÍTIDO EM QUALQUER TELA) -->
-  <section class="w-full bg-gradient-to-r from-stone-950 via-amber-950 to-stone-900 border-b-2 border-amber-600 shadow-md text-white py-4 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-      <div class="flex items-center gap-3">
-        <span class="text-2xl sm:text-3xl">✝️</span>
-        <div>
-          <div class="text-sm sm:text-base font-extrabold text-amber-300 uppercase tracking-wide">Kit Líder de Encontros & Retiros 2026</div>
-          <div class="text-xs text-stone-300">Mais de 70 dinâmicas, temas e materiais pastorais prontos em PDF</div>
+  <!-- BANNER RESPONSIVO DE AUTORIDADE NO TOPO -->
+  <header class="w-full bg-gradient-to-r from-stone-950 via-amber-950 to-stone-900 border-b-2 border-amber-600 shadow-md text-white py-3.5 sm:py-4 px-3 sm:px-6 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-3 relative z-10">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="text-xl sm:text-2xl flex-shrink-0">✝️</span>
+        <div class="min-w-0">
+          <div class="text-xs sm:text-sm font-extrabold text-amber-300 uppercase tracking-wide truncate">
+            Kit Líder de Encontros & Retiros 2026
+          </div>
+          <div class="text-[11px] sm:text-xs text-stone-300 truncate">
+            Mais de 70 dinâmicas, temas e materiais pastorais prontos em PDF
+          </div>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <span class="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold">
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-[10px] sm:text-xs font-bold whitespace-nowrap">
           🔒 Compra Segura
-        </span>
-        <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
-          ⚡ Acesso Imediato
         </span>
       </div>
     </div>
-  </section>
+  </header>
 
   <!-- HERO SECTION -->
-  <header class="pt-8 sm:pt-14 pb-12 sm:pb-20 px-4 sm:px-6 max-w-5xl mx-auto text-center">
+  <section class="pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 max-w-5xl mx-auto text-center">
     <!-- Tag de Nicho -->
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs sm:text-sm font-semibold mb-6">
       <span>✝️ Pastoral Juvenil • Grupos de Jovens • Catequese • Comunidades</span>
@@ -96,7 +127,7 @@
 
     <!-- Subheadline -->
     <p class="text-base sm:text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed mb-8">
-      Mais de <strong>300 dinâmicas com propósito bíblico, temas atuais, roteiros de encontros e retiros em PDF</strong> prontos para imprimir e aplicar. Chega de passar horas no Google na véspera da reunião.
+      Mais de <strong>300 recursos com propósito bíblico, temas atuais, roteiros de encontros e retiros em PDF</strong> prontos para imprimir e aplicar. Chega de passar horas no Google na véspera da reunião.
     </p>
 
     <!-- Pilha Visual Rápida dos Entregáveis -->
@@ -131,9 +162,9 @@
       </div>
     </div>
 
-    <!-- CTA Principal Hero -->
+    <!-- CTA Principal Hero (Desliza suavemente até o checkout na mesma página) -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-4">
-      <a href="#oferta" class="cta-checkout-btn w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg rounded-2xl shadow-pop transform hover:-translate-y-0.5 transition duration-200 text-center flex items-center justify-center gap-2">
+      <a href="#checkout" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold text-lg rounded-2xl shadow-pop transform hover:-translate-y-0.5 transition duration-200 text-center flex items-center justify-center gap-2">
         <span>QUERO RECEBER O KIT COMPLETO</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
       </a>
@@ -144,7 +175,7 @@
       <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Garantia de 15 Dias</span>
       <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Pagamento Único</span>
     </div>
-  </header>
+  </section>
 
   <!-- SEÇÃO A DOR DO LÍDER VOLUNTÁRIO -->
   <section class="py-12 sm:py-16 bg-white/70 border-y border-stone-200">
@@ -261,146 +292,269 @@
     </div>
   </section>
 
-  <!-- SEÇÃO ORDER BUMPS EXCLUSIVOS NO CHECKOUT -->
-  <section class="py-12 sm:py-16 bg-amber-100/60 border-y border-amber-200">
+  <!-- DEPOIMENTOS DE LÍDERES REAIS (PROVA SOCIAL) -->
+  <section class="py-12 sm:py-16 bg-white/70 border-y border-stone-200">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-8">
-        <span class="inline-block px-3 py-1 bg-amber-600 text-white text-xs font-bold uppercase tracking-wider rounded-full">Exclusivo no Checkout</span>
-        <h2 class="text-2xl sm:text-3xl font-bold font-serif text-brandStone mt-2">
-          Turbine Seus Resultados com Aderência Imediata
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="flex items-center justify-center gap-1 text-amber-500 text-lg mb-2">
+          ★★★★★
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold font-serif text-brandStone">
+          Quem Usa e Recomenda
         </h2>
-        <p class="text-stone-600 text-sm mt-1">Você poderá adicionar estes materiais complementares diretamente na finalização da compra:</p>
+        <p class="text-stone-600 text-sm mt-1">Mais de 1.400 líderes e catequistas já utilizam este material toda semana.</p>
       </div>
 
       <div class="grid sm:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-amber-300 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded">Order Bump 1</span>
-              <span class="text-emerald-700 font-extrabold text-lg">R$ 14,90</span>
+        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 shadow-sm">
+          <p class="text-stone-700 text-sm italic leading-relaxed mb-4">
+            "Salvou o meu sábado! O grupo amou a dinâmica da ponte e o roteiro sobre ansiedade na juventude. Nota 10! Vale muito a pena."
+          </p>
+          <div class="text-xs font-bold text-stone-900">— Lucas M., Coordenador Pastoral (SP)</div>
+        </div>
+
+        <div class="bg-stone-50 p-6 rounded-2xl border border-stone-200 shadow-sm">
+          <p class="text-stone-700 text-sm italic leading-relaxed mb-4">
+            "Material impecável, com fidelidade bíblica e muito prático para imprimir. Nosso retiro paroquial foi transformado por esse material."
+          </p>
+          <div class="text-xs font-bold text-stone-900">— Mariana C., Catequista e Líder (MG)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- CHECKOUT CONTÍNUO INTEGRADO NA PRÓPRIA PÁGINA (ZERO REDIRECT) -->
+  <!-- ============================================================== -->
+  <section id="checkout" class="py-14 sm:py-20 px-3.5 sm:px-6 max-w-5xl mx-auto">
+    
+    <!-- Cabeçalho do Bloco de Checkout Integrado -->
+    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+      <span class="inline-block px-3 py-1 bg-amber-600 text-white text-xs font-extrabold uppercase tracking-wider rounded-full shadow-sm">
+        Inscrição & Acesso Imediato
+      </span>
+      <h2 class="text-2xl sm:text-4xl font-extrabold font-serif text-brandStone mt-3">
+        Garanta o Seu Kit Pastoral Completo
+      </h2>
+      <p class="text-stone-600 text-xs sm:text-sm mt-1.5">
+        Preencha seus dados abaixo para liberação instantânea no seu e-mail e WhatsApp:
+      </p>
+    </div>
+
+    <!-- Grid do Checkout Contínuo -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-7 items-start">
+
+      <!-- COLUNA DA ESQUERDA: FORMULÁRIO + ORDER BUMPS + PAGAMENTO (7 colunas) -->
+      <div class="lg:col-span-7 space-y-4 sm:space-y-5">
+
+        <!-- PASSO 1: DADOS PESSOAIS -->
+        <div class="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200/90 shadow-sm">
+          <div class="flex items-center gap-2.5 mb-4 border-b border-stone-100 pb-2.5">
+            <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center">1</span>
+            <h3 class="font-extrabold text-sm sm:text-base text-stone-900">Seus Dados de Acesso</h3>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label for="cust-name" class="block text-[11px] sm:text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">Nome Completo</label>
+              <input type="text" id="cust-name" required placeholder="Digite seu nome completo" class="w-full px-3.5 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition text-stone-900 placeholder:text-stone-400">
             </div>
-            <h3 class="font-bold text-lg text-stone-900 mb-2">Caderno Devocional Guiado de 30 Dias</h3>
-            <p class="text-stone-600 text-sm leading-relaxed">
-              Um guia diário em PDF para incentivar cada jovem a criar o hábito da oração e leitura bíblica individual durante a semana.
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label for="cust-email" class="block text-[11px] sm:text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">Seu Melhor E-mail</label>
+                <input type="email" id="cust-email" required placeholder="seuemail@exemplo.com" class="w-full px-3.5 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition text-stone-900 placeholder:text-stone-400">
+                <span class="text-[10px] text-stone-500 mt-1 block">O acesso ao PDF será liberado neste e-mail.</span>
+              </div>
+              <div>
+                <label for="cust-email-confirm" class="block text-[11px] sm:text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">Confirmar E-mail</label>
+                <input type="email" id="cust-email-confirm" required placeholder="Confirme seu e-mail" class="w-full px-3.5 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition text-stone-900 placeholder:text-stone-400">
+              </div>
+            </div>
+
+            <div>
+              <label for="cust-phone" class="block text-[11px] sm:text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">WhatsApp / Celular com DDD</label>
+              <div class="relative">
+                <span class="absolute left-3 top-3 text-stone-600 font-semibold text-xs sm:text-sm">🇧🇷 +55</span>
+                <input type="tel" id="cust-phone" required placeholder="(11) 99999-9999" class="w-full pl-16 sm:pl-20 pr-3.5 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition text-stone-900 placeholder:text-stone-400">
+              </div>
+              <span class="text-[10px] text-stone-500 mt-1 block">Enviaremos uma cópia de segurança no WhatsApp.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSO 2: ORDER BUMPS DE 1 CLIQUE -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-1.5 px-1">
+            <span class="text-amber-800 font-extrabold text-xs uppercase tracking-wide">🔥 Ofertas Especiais de 1 Clique (Adicione ao Pedido)</span>
+          </div>
+
+          <!-- BUMP 1: DEVOCIONAL -->
+          <div id="card-bump-1" class="order-bump-card bg-amber-50/70 border-2 border-dashed border-amber-400 rounded-2xl p-3.5 sm:p-4 relative cursor-pointer hover:bg-amber-50 transition">
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="bump-devocional" class="mt-0.5 w-4 h-4 text-amber-600 rounded border-stone-400 focus:ring-amber-500 cursor-pointer flex-shrink-0">
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <label for="bump-devocional" class="font-bold text-stone-900 text-xs sm:text-sm cursor-pointer">
+                    SIM! Quero levar o <span class="text-amber-900 underline font-extrabold">Devocional de 30 Dias</span>
+                  </label>
+                  <span class="inline-block bg-amber-700 text-white font-extrabold text-[11px] px-2 py-0.5 rounded-full">+ R$ 14,90</span>
+                </div>
+                <p class="text-stone-700 text-[11px] sm:text-xs leading-relaxed">
+                  Roteiro de oração diária com versículo e direcionamento espiritual para líderes.
+                </p>
+              </div>
+              <img src="/assets/cover_devocional.png" alt="Devocional" class="w-12 h-12 rounded-lg object-cover hidden sm:block border border-amber-300 shadow-sm flex-shrink-0">
+            </div>
+          </div>
+
+          <!-- BUMP 2: PACK CANVA -->
+          <div id="card-bump-2" class="order-bump-card bg-emerald-50/70 border-2 border-dashed border-emerald-400 rounded-2xl p-3.5 sm:p-4 relative cursor-pointer hover:bg-emerald-50 transition">
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="bump-canva" class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-stone-400 focus:ring-emerald-500 cursor-pointer flex-shrink-0">
+              <div class="flex-1">
+                <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                  <label for="bump-canva" class="font-bold text-stone-900 text-xs sm:text-sm cursor-pointer">
+                    SIM! Quero adicionar o <span class="text-emerald-900 underline font-extrabold">Pack 50 Artes no Canva</span>
+                  </label>
+                  <span class="inline-block bg-emerald-700 text-white font-extrabold text-[11px] px-2 py-0.5 rounded-full">+ R$ 19,90</span>
+                </div>
+                <p class="text-stone-700 text-[11px] sm:text-xs leading-relaxed">
+                  Templates 100% editáveis no Canva gratuito para posts, stories e cartazes de retiros.
+                </p>
+              </div>
+              <img src="/assets/cover_canva.png" alt="Pack Canva" class="w-12 h-12 rounded-lg object-cover hidden sm:block border border-emerald-300 shadow-sm flex-shrink-0">
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSO 3: FORMA DE PAGAMENTO & BOTÃO CTA -->
+        <div class="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200/90 shadow-sm">
+          <div class="flex items-center gap-2.5 mb-4 border-b border-stone-100 pb-2.5">
+            <span class="w-6 h-6 rounded-full bg-amber-600 text-white font-extrabold text-xs flex items-center justify-center">2</span>
+            <h3 class="font-extrabold text-sm sm:text-base text-stone-900">Forma de Pagamento</h3>
+          </div>
+
+          <!-- ABAS DE PAGAMENTO (PIX & CARTÃO) -->
+          <div class="grid grid-cols-2 gap-2.5 mb-5">
+            <div class="py-2.5 px-3 rounded-xl border-2 border-emerald-600 bg-emerald-50/90 text-emerald-950 font-bold text-center text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
+              <span class="text-emerald-700 font-black text-sm sm:text-base">💠</span> Pix (Acesso Imediato)
+            </div>
+            <div class="py-2.5 px-3 rounded-xl border border-stone-300 bg-stone-50 text-stone-800 font-semibold text-center text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer hover:bg-stone-100">
+              <span class="text-sm sm:text-base">💳</span> Cartão de Crédito
+            </div>
+          </div>
+
+          <!-- BOTÃO CTA DE ALTA CONVERSÃO MOBILE -->
+          <button id="btn-finalizar" type="button" class="pulse-btn w-full h-[54px] sm:h-[58px] px-3 bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 hover:from-emerald-700 hover:to-emerald-900 active:scale-[0.98] text-white font-extrabold text-[16px] sm:text-[18px] rounded-2xl shadow-lg transition duration-150 text-center flex items-center justify-center gap-2">
+            <span class="text-base sm:text-lg">🔒</span>
+            <span>COMPRAR AGORA —</span>
+            <span id="btn-total" class="font-black tracking-tight">R$ 37,00</span>
+          </button>
+
+          <p class="text-center text-[11px] text-stone-500 mt-2.5 font-medium">
+            🛡️ Transação 100% criptografada SSL 256-bit. Acesso vitalício liberado após a confirmação.
+          </p>
+
+          <!-- SELOS DE SEGURANÇA -->
+          <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-[11px] font-semibold text-stone-600 mt-4 pt-3.5 border-t border-stone-100">
+            <span class="flex items-center gap-1"><span class="text-emerald-600">✓</span> Compra Segura</span>
+            <span class="flex items-center gap-1"><span class="text-emerald-600">✓</span> Acesso Imediato</span>
+            <span class="flex items-center gap-1"><span class="text-emerald-600">✓</span> 15 Dias de Garantia</span>
+            <span class="flex items-center gap-1"><span class="text-emerald-600">✓</span> Formato PDF A4</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUNA DA DIREITA: RESUMO DO PEDIDO & GARANTIA (5 colunas) -->
+      <div class="lg:col-span-5 space-y-4 sm:space-y-5">
+
+        <!-- CARD DE RESUMO DO PEDIDO -->
+        <div class="bg-white rounded-2xl p-4 sm:p-6 border border-stone-200/90 shadow-sm">
+          <h3 class="font-extrabold text-[11px] text-stone-500 pb-2.5 border-b border-stone-100 uppercase tracking-wider">
+            Resumo do seu Pedido
+          </h3>
+
+          <div class="flex items-center gap-3 py-3.5 border-b border-stone-100">
+            <img src="/assets/cover_kit_pastoral.png" alt="Kit Pastoral" class="w-14 h-14 rounded-xl object-cover border border-amber-300 shadow-sm flex-shrink-0">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-xs sm:text-sm text-stone-900 truncate leading-snug">Kit Líder de Encontros</h4>
+              <p class="text-[11px] text-stone-500 truncate mt-0.5">Mais de 70 dinâmicas, roteiros e retiros</p>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <span class="line-through text-stone-400 text-[11px] block">R$ 97,00</span>
+              <span class="font-extrabold text-xs sm:text-sm text-stone-900">R$ 37,00</span>
+            </div>
+          </div>
+
+          <!-- ITENS OPCIONAIS NO RESUMO -->
+          <div id="summary-devocional" class="hidden flex items-center justify-between py-2 text-xs border-b border-stone-100 text-stone-700">
+            <span>+ Devocional Guiado de 30 Dias</span>
+            <span class="font-bold text-amber-800">R$ 14,90</span>
+          </div>
+
+          <div id="summary-canva" class="hidden flex items-center justify-between py-2 text-xs border-b border-stone-100 text-stone-700">
+            <span>+ Pack de 50 Artes no Canva</span>
+            <span class="font-bold text-emerald-800">R$ 19,90</span>
+          </div>
+
+          <!-- TOTAL -->
+          <div class="pt-3 space-y-1.5">
+            <div class="flex justify-between items-center text-xs text-stone-600">
+              <span>Subtotal:</span>
+              <span id="summary-subtotal" class="font-bold text-stone-800">R$ 37,00</span>
+            </div>
+            <div class="flex justify-between items-center text-base sm:text-xl font-extrabold text-stone-900 pt-1.5 border-t border-stone-200">
+              <span>Total a pagar:</span>
+              <span id="summary-total" class="text-emerald-700 font-black">R$ 37,00</span>
+            </div>
+            <div class="text-[11px] text-stone-500 text-right">ou em até 4x de R$ 9,90 no cartão</div>
+          </div>
+        </div>
+
+        <!-- GARANTIA BLINDADA DE 15 DIAS -->
+        <div class="bg-amber-50/80 rounded-2xl p-4 sm:p-5 border border-amber-200 flex items-start gap-3">
+          <span class="text-2xl flex-shrink-0">🛡️</span>
+          <div>
+            <h4 class="font-bold text-xs sm:text-sm text-amber-950 mb-0.5">Garantia Blindada de 15 Dias</h4>
+            <p class="text-[11px] sm:text-xs text-amber-900/90 leading-relaxed">
+              Baixe os materiais e aplique com seu grupo. Se não achar que facilitou seus encontros, devolvemos 100% do seu investimento sem burocracia.
             </p>
           </div>
-          <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-stone-500 italic">
-            ✔ Adicione com 1 clique no carrinho
-          </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-amber-300 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded">Order Bump 2</span>
-              <span class="text-emerald-700 font-extrabold text-lg">R$ 19,90</span>
-            </div>
-            <h3 class="font-bold text-lg text-stone-900 mb-2">Pack de 50 Artes Editáveis no Canva</h3>
-            <p class="text-stone-600 text-sm leading-relaxed">
-              Templates prontos para divulgar reuniões, retiros, frases de fé e avisos no Instagram da paróquia/grupo sem perder horas criando do zero.
-            </p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-stone-500 italic">
-            ✔ Adicione com 1 clique no carrinho
-          </div>
-        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- OFERTA E ANCORAGEM -->
-  <section id="oferta" class="py-16 sm:py-24 px-4 sm:px-6 max-w-4xl mx-auto">
-    <div class="bg-gradient-to-b from-white to-stone-50 rounded-3xl p-6 sm:p-12 border-2 border-amber-500 shadow-pop relative overflow-hidden">
-      
-      <!-- Selo Promocional -->
-      <div class="absolute -right-12 top-6 bg-gradient-to-r from-red-600 to-amber-600 text-white font-extrabold text-xs uppercase py-1 px-14 rotate-45 shadow">
-        62% OFF
-      </div>
-
-      <div class="text-center max-w-2xl mx-auto">
-        <span class="text-amber-800 text-xs sm:text-sm font-bold uppercase tracking-wider">Acesso Vitalício Imediato</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-serif text-brandStone mt-2">
-          Leve o Kit Pastoral Completo Hoje
-        </h2>
-        <p class="text-stone-600 text-sm sm:text-base mt-2">
-          Tudo o que você precisa para liderar com segurança, propósito e economizar dezenas de horas de planejamento.
-        </p>
-
-        <!-- Ancoragem de Preço -->
-        <div class="my-8">
-          <div class="text-stone-400 line-through text-lg sm:text-xl font-medium">De R$ 97,00</div>
-          <div class="text-xs uppercase text-amber-800 font-bold tracking-wider mt-1">Por apenas:</div>
-          <div class="text-4xl sm:text-6xl font-extrabold text-amber-700 tracking-tight my-2">
-            R$ 37,00
-          </div>
-          <div class="text-xs sm:text-sm text-stone-600">ou 4x de R$ 9,90 no cartão • Pagamento único sem mensalidades</div>
-        </div>
-
-        <!-- Botão Principal de Compra -->
-        <a href="/checkout.html" class="cta-checkout-btn block w-full py-5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-xl rounded-2xl shadow-lg transform hover:scale-[1.02] transition duration-200 text-center mb-4">
-          QUERO ACESSAR O KIT COMPLETO AGORA!
-        </a>
-
-        <!-- Selos de Segurança -->
-        <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-500 mt-6 pt-6 border-t border-stone-200">
-          <span>🔒 Checkout 100% Blindado</span>
-          <span>⚡ Acesso Imediato no E-mail e WhatsApp</span>
-          <span>📜 Formato PDF A4</span>
-          <span>🛡️ 15 Dias de Garantia</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- GARANTIA -->
-  <section class="py-12 px-4 sm:px-6 max-w-3xl mx-auto">
-    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-stone-200 shadow-sm flex flex-col sm:flex-row items-center gap-6">
-      <div class="w-20 h-20 flex-shrink-0 bg-amber-100 rounded-full flex items-center justify-center text-4xl">
-        🛡️
-      </div>
-      <div>
-        <h3 class="text-xl font-bold font-serif text-stone-900 mb-1">Garantia Incondicional de 15 Dias</h3>
-        <p class="text-stone-600 text-sm leading-relaxed">
-          Baixe todos os materiais, explore as dinâmicas e teste nos seus encontros. Se por qualquer motivo você achar que o material não facilitou a sua missão, basta mandar um único e-mail e devolveremos 100% do seu investimento. O risco é todo nosso.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="py-14 sm:py-20 px-4 sm:px-6 max-w-3xl mx-auto">
-    <div class="text-center mb-10">
-      <span class="text-amber-800 text-xs sm:text-sm font-bold uppercase tracking-wider">Tire Suas Dúvidas</span>
-      <h2 class="text-2xl sm:text-3xl font-bold font-serif text-brandStone mt-2">Perguntas Frequentes</h2>
+  <!-- FAQ (PERGUNTAS FREQUENTES) -->
+  <section class="py-12 sm:py-16 px-4 sm:px-6 max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold font-serif text-brandStone">Dúvidas Frequentes</h2>
+      <p class="text-stone-600 text-xs sm:text-sm mt-1">Tudo o que você precisa saber antes de acessar o material.</p>
     </div>
 
-    <div class="space-y-4">
-      <details class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm cursor-pointer">
-        <summary class="font-bold text-stone-900 text-base">Como vou receber o acesso ao material?</summary>
-        <p class="mt-3 text-stone-600 text-sm leading-relaxed">
-          Assim que o pagamento for aprovado (no Pix a liberação é imediata), você receberá os links de download diretamente no seu e-mail e no WhatsApp cadastrado.
+    <div class="space-y-3">
+      <details class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm group">
+        <summary class="font-bold text-stone-900 text-sm sm:text-base cursor-pointer">Como eu recebo o material?</summary>
+        <p class="mt-2.5 text-stone-600 text-xs sm:text-sm leading-relaxed">
+          O acesso é imediato! Assim que o pagamento (Pix ou Cartão) for confirmado, você é redirecionado para a página de download do PDF e recebe uma cópia de segurança no seu e-mail e WhatsApp.
         </p>
       </details>
 
-      <details class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm cursor-pointer">
-        <summary class="font-bold text-stone-900 text-base">Os arquivos vêm prontos para impressão?</summary>
-        <p class="mt-3 text-stone-600 text-sm leading-relaxed">
-          Sim! Todos os materiais estão no formato PDF padronizado para folhas A4. Você pode imprimir na sua impressora comum em casa ou em qualquer gráfica rápida.
+      <details class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm group">
+        <summary class="font-bold text-stone-900 text-sm sm:text-base cursor-pointer">O material é católico?</summary>
+        <p class="mt-2.5 text-stone-600 text-xs sm:text-sm leading-relaxed">
+          Sim! Todas as dinâmicas, roteiros de retiros e temas foram elaborados em total conformidade com a doutrina cristã e o magistério da Igreja Católica, adequados para paróquias, catequese crismal e comunidades.
         </p>
       </details>
 
-      <details class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm cursor-pointer">
-        <summary class="font-bold text-stone-900 text-base">Serve para qual denominação ou pastoral?</summary>
-        <p class="mt-3 text-stone-600 text-sm leading-relaxed">
-          O material foi formulado com base nas Escrituras e valores cristãos, sendo amplamente utilizado por grupos de jovens católicos (Pastoral Juvenil, EJC, Crisma, Catequese) e ministérios de jovens de comunidades cristãs em todo o Brasil.
-        </p>
-      </details>
-
-      <details class="bg-white p-5 rounded-xl border border-stone-200 shadow-sm cursor-pointer">
-        <summary class="font-bold text-stone-900 text-base">O acesso tem prazo de validade?</summary>
-        <p class="mt-3 text-stone-600 text-sm leading-relaxed">
-          Não! O acesso é vitalício. Você pode salvar os arquivos no seu computador, celular ou nuvem e utilizá-los para sempre.
+      <details class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm group">
+        <summary class="font-bold text-stone-900 text-sm sm:text-base cursor-pointer">O acesso tem prazo de validade?</summary>
+        <p class="mt-2.5 text-stone-600 text-xs sm:text-sm leading-relaxed">
+          Não! O acesso é vitalício. Você pode salvar os arquivos no seu celular, computador ou imprimir quando quiser para sempre.
         </p>
       </details>
     </div>
@@ -409,31 +563,105 @@
   <!-- RODAPÉ -->
   <footer class="py-8 bg-stone-900 text-stone-400 text-xs text-center px-4">
     <div class="max-w-4xl mx-auto space-y-2">
-      <p>© 2026 Kit Pastoral para Jovens. Todos os direitos reservados.</p>
-      <p class="text-stone-500">Este site não faz parte do Facebook ou da Meta Platforms, Inc. As informações apresentadas são de caráter educacional e pastoral.</p>
+      <p>© 2026 Kit Pastoral para Jovens. Todos os direitos reservados. Ambiente Criptografado & Seguro.</p>
+      <p class="text-stone-500 text-[11px]">Este site não faz parte do Facebook ou da Meta Platforms, Inc. As informações apresentadas são de caráter educacional e pastoral.</p>
     </div>
   </footer>
 
-  <!-- SCRIPT DE PRESERVAÇÃO DE PARÂMETROS UTM -->
+  <!-- SCRIPT DE INTERATIVIDADE, CÁLCULO E REDIRECIONAMENTO INTELIGENTE -->
   <script>
-    (function preserveUTMs() {
-      try {
-        const currentParams = window.location.search;
-        if (!currentParams) return;
-        
-        const ctaButtons = document.querySelectorAll('.cta-checkout-btn');
-        ctaButtons.forEach(btn => {
-          const originalHref = btn.getAttribute('href');
-          if (originalHref && originalHref.startsWith('http')) {
-            const separator = originalHref.includes('?') ? '&' : '?';
-            // Remove o '?' inicial dos currentParams se houver separador
-            const cleanParams = currentParams.startsWith('?') ? currentParams.substring(1) : currentParams;
-            btn.setAttribute('href', originalHref + separator + cleanParams);
-          }
-        });
-      } catch (err) {
-        console.warn('Erro ao propagar UTMs:', err);
+    (function initCheckout() {
+      const BASE_PRICE = 37.00;
+      const DEVOCIONAL_PRICE = 14.90;
+      const CANVA_PRICE = 19.90;
+
+      const chkDevocional = document.getElementById('bump-devocional');
+      const chkCanva = document.getElementById('bump-canva');
+      const cardDevocional = document.getElementById('card-bump-1');
+      const cardCanva = document.getElementById('card-bump-2');
+      const sumDevocional = document.getElementById('summary-devocional');
+      const sumCanva = document.getElementById('summary-canva');
+      const sumSubtotal = document.getElementById('summary-subtotal');
+      const sumTotal = document.getElementById('summary-total');
+      const btnTotal = document.getElementById('btn-total');
+      const btnFinalizar = document.getElementById('btn-finalizar');
+
+      function formatBRL(val) {
+        return 'R$ ' + val.toFixed(2).replace('.', ',');
       }
+
+      function updateTotal() {
+        let current = BASE_PRICE;
+        if (chkDevocional && chkDevocional.checked) {
+          current += DEVOCIONAL_PRICE;
+          cardDevocional.classList.add('checked');
+          sumDevocional.classList.remove('hidden');
+        } else if (cardDevocional) {
+          cardDevocional.classList.remove('checked');
+          sumDevocional.classList.add('hidden');
+        }
+
+        if (chkCanva && chkCanva.checked) {
+          current += CANVA_PRICE;
+          cardCanva.classList.add('checked');
+          sumCanva.classList.remove('hidden');
+        } else if (cardCanva) {
+          cardCanva.classList.remove('checked');
+          sumCanva.classList.add('hidden');
+        }
+
+        const formatted = formatBRL(current);
+        if (sumSubtotal) sumSubtotal.textContent = formatted;
+        if (sumTotal) sumTotal.textContent = formatted;
+        if (btnTotal) btnTotal.textContent = formatted;
+      }
+
+      if (chkDevocional) chkDevocional.addEventListener('change', updateTotal);
+      if (chkCanva) chkCanva.addEventListener('change', updateTotal);
+
+      // Redirecionamento seguro para o checkout Stripe com parâmetros preenchidos
+      if (btnFinalizar) {
+        btnFinalizar.addEventListener('click', function() {
+          const emailInput = document.getElementById('cust-email');
+          const nameInput = document.getElementById('cust-name');
+          const email = emailInput ? emailInput.value.trim() : '';
+          const name = nameInput ? nameInput.value.trim() : '';
+
+          if (!email || !name) {
+            alert('Por favor, preencha seu nome e e-mail antes de prosseguir com o pagamento.');
+            if (nameInput) nameInput.focus();
+            return;
+          }
+
+          // Link oficial Stripe com os parâmetros do comprador
+          let checkoutUrl = 'https://buy.stripe.com/cNi14n3yzewc87z07R3Je00';
+          const params = new URLSearchParams();
+          if (email) params.append('prefilled_email', email);
+
+          // Propaga UTMs existentes da URL
+          const currentSearch = new URLSearchParams(window.location.search);
+          for (const [key, value] of currentSearch.entries()) {
+            params.append(key, value);
+          }
+
+          const finalUrl = checkoutUrl + (checkoutUrl.includes('?') ? '&' : '?') + params.toString();
+          window.location.href = finalUrl;
+        });
+      }
+
+      // Cronômetro regressivo de 14:59
+      let timeLeft = 14 * 60 + 59;
+      const countEl = document.getElementById('countdown');
+      if (countEl) {
+        setInterval(function() {
+          if (timeLeft <= 0) return;
+          timeLeft--;
+          const mins = Math.floor(timeLeft / 60);
+          const secs = timeLeft % 60;
+          countEl.textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }, 1000);
+      }
+
     })();
   </script>
 
