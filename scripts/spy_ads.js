@@ -22,22 +22,22 @@ async function runAdEspionage() {
   console.log('=====================================================');
   console.log(`🔑 Usando Token: ${APIFY_TOKEN.substring(0, 14)}...`);
 
-  // URLs de busca cirúrgicas para Low Ticket & Infoprodutos no Brasil
+  // URLs de busca cirúrgicas focadas no nicho Cristão, Pastoral e Dinâmicas para Jovens
   const targetUrls = [
     {
-      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=pay.kiwify.com.br&search_type=keyword_unordered&media_type=all"
+      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=dinamicas%20para%20jovens&search_type=keyword_unordered&media_type=all"
     },
     {
-      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=dinamicas%20jovens%20pdf&search_type=keyword_unordered&media_type=all"
+      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=dinamicas%20cristas%20pdf&search_type=keyword_unordered&media_type=all"
     },
     {
-      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=pastoral%20jovens%20apostila&search_type=keyword_unordered&media_type=all"
+      url: "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=BR&q=lider%20de%20jovens%20apostila&search_type=keyword_unordered&media_type=all"
     }
   ];
 
   const input = {
     urls: targetUrls,
-    count: 30, // Quantidade otimizada para teste rápido e consumo mínimo de créditos
+    count: 40, // Coleta até 40 anúncios específicos do nicho
     scrapeAdDetails: false
   };
 
