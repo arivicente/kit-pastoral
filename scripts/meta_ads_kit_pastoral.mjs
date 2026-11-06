@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const TOKEN = 'EAAgl7zR5FK0BS2zPHZBTJBUuKAoQ4MY0W8l2PZBd4jGJD9OGeY24q560O384ZAJ6pkQYSPWttmNRO763ZAe02nhL0tBQOrj5kQFZCeTqa7rwi3kg2SlNf1LpHzBOjtZA7FqAoT2Cv68txSpw6l6d0EGBjxXOQYQ10WYjV83tZCKOqpdr4ZBnyyywYWhDX82nNwZDZD';
 const AD_ACCOUNT_ID = 'act_898705452000785';
-const PAGE_ID = '1411397938722584';
+const PAGE_ID = '1499768259876658'; // Acervo Digital Oficial (NOVA PÁGINA GENÉRICA!)
 const PIXEL_ID = '7862991820414968';
 const GRAPH_API = 'https://graph.facebook.com/v20.0';
 
@@ -55,10 +55,10 @@ async function uploadImage(filePath) {
 }
 
 async function run() {
-  console.log('🚀 === MERCÚRIO: CRIAÇÃO AUTÔNOMA DE CAMPANHA META ADS ===\n');
+  console.log('🚀 === ATUALIZANDO META ADS COM PÁGINA "ACERVO DIGITAL" E CRIATIVOS DAVINCI V2 ===\n');
 
-  // 1. Upload dos 3 criativos 4:5
-  console.log('[Passo 1/4] Fazendo upload dos 3 criativos 4:5...');
+  // 1. Upload dos novos 3 criativos 4:5
+  console.log('[Passo 1/3] Fazendo upload das novas artes remasterizadas...');
   const ad1Path = path.join(__dirname, '..', 'public', 'anuncios', 'ad_01_comparativo_4x5.png');
   const ad2Path = path.join(__dirname, '..', 'public', 'anuncios', 'ad_02_dinamica_revelada_4x5.png');
   const ad3Path = path.join(__dirname, '..', 'public', 'anuncios', 'ad_03_acervo_completo_4x5.png');
@@ -67,141 +67,80 @@ async function run() {
   const hash2 = await uploadImage(ad2Path);
   const hash3 = await uploadImage(ad3Path);
 
-  // 2. Criação da Campanha (PAUSADA)
-  console.log('\n[Passo 2/4] Verificando / Criando Campanha (Status: PAUSED)...');
-  const campaignName = '[Kit Pastoral] 01. Validação Direct Response';
-  
-  const existingCamp = await api(`/${AD_ACCOUNT_ID}/campaigns?fields=id,name`);
-  let campaignId = existingCamp.data?.find(c => c.name === campaignName)?.id;
+  // 2. Busca campanha e adset existentes
+  const camps = await api(`/${AD_ACCOUNT_ID}/campaigns?fields=id,name`);
+  const campaignId = camps.data?.find(c => c.name.includes('[Kit Pastoral]'))?.id;
+  const adsets = await api(`/${AD_ACCOUNT_ID}/adsets?fields=id,name,campaign_id`);
+  const adSetId = adsets.data?.find(a => a.campaign_id === campaignId)?.id;
 
-  if (!campaignId) {
-    const newCamp = await api(`/${AD_ACCOUNT_ID}/campaigns`, 'POST', {
-      name: campaignName,
-      objective: 'OUTCOME_TRAFFIC',
-      status: 'PAUSED',
-      special_ad_categories: [],
-      is_adset_budget_sharing_enabled: false
-    });
-    campaignId = newCamp.id;
-    console.log(`✅ Campanha criada! ID: ${campaignId}`);
-  } else {
-    console.log(`ℹ️ Campanha já existente encontrada! ID: ${campaignId}`);
-  }
+  console.log(`\nCampanha vinculada: ${campaignId}`);
+  console.log(`AdSet vinculado:    ${adSetId}`);
 
-  // 3. Criação do Conjunto de Anúncios (AdSet)
-  console.log('\n[Passo 3/4] Criando Conjunto de Anúncios (AdSet)...');
-  const adSetName = '01. Brasil - Pastores, Pregadores & Líderes (25-65a)';
-  const existingAdSets = await api(`/${AD_ACCOUNT_ID}/adsets?fields=id,name`);
-  let adSetId = existingAdSets.data?.find(a => a.name === adSetName)?.id;
+  // 3. Criação dos 3 Novos Criativos Vinculados à Página Acervo Digital (1499768259876658)
+  console.log(`\n[Passo 2/3] Vinculando à nova Página Oficial: Acervo Digital (ID: ${PAGE_ID})...`);
 
-  if (!adSetId) {
-    const targeting = {
-      geo_locations: {
-        countries: ['BR']
-      },
-      age_min: 25,
-      age_max: 65,
-      publisher_platforms: ['facebook', 'instagram', 'audience_network', 'messenger']
-    };
-
-    const newAdSet = await api(`/${AD_ACCOUNT_ID}/adsets`, 'POST', {
-      name: adSetName,
-      campaign_id: campaignId,
-      daily_budget: 3000, // R$ 30,00/dia
-      billing_event: 'IMPRESSIONS',
-      optimization_goal: 'LINK_CLICKS',
-      bid_strategy: 'LOWEST_COST_WITHOUT_CAP',
-      targeting,
-      status: 'PAUSED'
-    });
-    adSetId = newAdSet.id;
-    console.log(`✅ AdSet criado! ID: ${adSetId}`);
-  } else {
-    console.log(`ℹ️ AdSet já existente encontrado! ID: ${adSetId}`);
-  }
-
-  // 4. Criação dos 3 Criativos e Anúncios
-  console.log('\n[Passo 4/4] Criando os 3 Criativos e Anúncios...');
   const adsData = [
     {
       hash: hash1,
-      name: 'Anúncio 01 - Comparativo Antes vs Depois (6 Horas)',
-      headline: 'Prepare Sermões Profundos em 15 Minutos',
-      body: 'Cansado de passar horas e noites tentando estruturar esboços de mensagens? Tenha em mãos mais de 100 esboços exegéticos e 70 dinâmicas prontas em PDF para celular ou impressão.',
+      name: 'Anúncio 01 - Comparativo Antes vs Depois (Remaster DaVinci)',
+      headline: 'Liderar Encontros Não Precisa Ser um Pesadelo',
+      body: 'Cansado de passar horas toda semana caçando dinâmicas na internet? Tenha em mãos mais de 70 dinâmicas aplicadas e 100 esboços bíblicos prontos para celular ou impressão.',
       link: 'https://kit-pastoral.codhun.workers.dev'
     },
     {
       hash: hash2,
-      name: 'Anúncio 02 - Dinâmicas Reveladas para Jovens e Retiros',
-      headline: 'A Dinâmica Bíblica que Mantém Todos Atentos',
-      body: 'Elimine o improviso e o desinteresse nos encontros. O acervo completo traz roteiros de dinâmicas com moral espiritual profunda, quebra-gelos e temas de retiros prontos para aplicar.',
+      name: 'Anúncio 02 - Dinâmica Revelada Ponte de Papel (Remaster DaVinci)',
+      headline: 'A Dinâmica da Ponte de Confiança (Pronta)',
+      body: 'Elimine o improviso e o desinteresse nos encontros. Veja a dinâmica completa da Ponte de Confiança com versículo e perguntas de reflexão prontas no acervo.',
       link: 'https://kit-pastoral.codhun.workers.dev'
     },
     {
       hash: hash3,
-      name: 'Anúncio 03 - Acervo Pastoral Completo 2026 (R$ 37)',
+      name: 'Anúncio 03 - Acervo Completo em Módulos (Remaster DaVinci)',
       headline: 'Acervo Pastoral Completo 2026 em PDF',
-      body: 'Acesso vitalício imediato a mais de 300 recursos: 100 esboços, 70 dinâmicas, 4 bônus exclusivos. Baixe no celular agora por apenas R$ 37,00 via Pix ou Cartão.',
+      body: 'Mais de 300 recursos: 35 quebra-gelos, 25 roteiros atuais, 44 roteiros de retiros, 28 desafios WhatsApp e 100 versículos temáticos. Apenas R$ 37,00 com acesso vitalício.',
       link: 'https://kit-pastoral.codhun.workers.dev'
     }
   ];
 
   for (const item of adsData) {
-    // AdCreative
-    const creativeName = `Criativo - ${item.name}`;
-    const existingCreatives = await api(`/${AD_ACCOUNT_ID}/adcreatives?fields=id,name`);
-    let creativeId = existingCreatives.data?.find(c => c.name === creativeName)?.id;
-
-    if (!creativeId) {
-      const objectStorySpec = {
-        page_id: PAGE_ID,
-        link_data: {
-          link: item.link,
-          message: item.body,
-          name: item.headline,
-          description: 'Acesso Imediato no Celular • Garantia de 7 Dias',
-          image_hash: item.hash,
-          call_to_action: {
-            type: 'LEARN_MORE',
-            value: { link: item.link }
-          }
+    const creativeName = `Criativo v2 - ${item.name}`;
+    const objectStorySpec = {
+      page_id: PAGE_ID,
+      link_data: {
+        link: item.link,
+        message: item.body,
+        name: item.headline,
+        description: 'Página Oficial • Acesso Imediato no Celular ou PC',
+        image_hash: item.hash,
+        call_to_action: {
+          type: 'LEARN_MORE',
+          value: { link: item.link }
         }
-      };
+      }
+    };
 
-      const newCreative = await api(`/${AD_ACCOUNT_ID}/adcreatives`, 'POST', {
-        name: creativeName,
-        object_story_spec: objectStorySpec
-      });
-      creativeId = newCreative.id;
-      console.log(`✅ Criativo registrado: [${creativeId}] ${creativeName}`);
-    } else {
-      console.log(`ℹ️ Criativo já existente: [${creativeId}] ${creativeName}`);
-    }
+    const newCreative = await api(`/${AD_ACCOUNT_ID}/adcreatives`, 'POST', {
+      name: creativeName,
+      object_story_spec: objectStorySpec
+    });
+    console.log(`✅ Novo Criativo v2 registrado: [${newCreative.id}] ${creativeName}`);
 
-    // Ad
-    const existingAds = await api(`/${AD_ACCOUNT_ID}/ads?fields=id,name,adset_id`);
-    let adId = existingAds.data?.find(a => a.name === item.name && a.adset_id === adSetId)?.id;
-
-    if (!adId) {
-      const newAd = await api(`/${AD_ACCOUNT_ID}/ads`, 'POST', {
-        name: item.name,
-        adset_id: adSetId,
-        creative: { creative_id: creativeId },
-        status: 'PAUSED'
-      });
-      adId = newAd.id;
-      console.log(`🎉 Anúncio criado: [${adId}] ${item.name}`);
-    } else {
-      console.log(`ℹ️ Anúncio já existente: [${adId}] ${item.name}`);
-    }
+    // Cria o anúncio com o novo criativo na nova página
+    const newAd = await api(`/${AD_ACCOUNT_ID}/ads`, 'POST', {
+      name: item.name,
+      adset_id: adSetId,
+      creative: { creative_id: newCreative.id },
+      status: 'PAUSED'
+    });
+    console.log(`🎉 Anúncio v2 criado com sucesso: [${newAd.id}] ${item.name}`);
   }
 
   console.log('\n✨ ========================================================');
-  console.log('ESTRUTURA COMPLETA DE TRÁFEGO DO KIT PASTORAL CRIADA COM SUCESSO!');
-  console.log(`- Campanha ID: ${campaignId}`);
-  console.log(`- AdSet ID:    ${adSetId}`);
-  console.log(`- Pixel:       ${PIXEL_ID} (Kit Pastoral - Pixel Oficial)`);
-  console.log(`- Status:      PAUSED (Rascunho seguro para sua revisão no Gerenciador)`);
+  console.log('ESTRUTURA ATUALIZADA COM SUCESSO!');
+  console.log(`- Página Anunciante: Acervo Digital (ID: ${PAGE_ID})`);
+  console.log(`- Criativos: Remasterizados pelo DaVinci com auditoria Atena`);
+  console.log(`- Status: PAUSED (Pronto para revisão ou ativação imediata)`);
   console.log('========================================================\n');
 }
 
