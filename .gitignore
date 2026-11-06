@@ -7,3 +7,4 @@ dist/
 mineracao_resultados.json
 .DS_Store
 Thumbs.db
+*.png
